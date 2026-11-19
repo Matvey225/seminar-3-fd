@@ -13,5 +13,11 @@ fun transform(n: Int): Int {
 }
 
 fun maxNBelow(limit: Int): Int {
-    TODO()
+    var max = 0
+    for (n in 1..10000){
+        if ((transform(n) < limit) && (n > max)){
+            max = n
+        }
+    }
+    return max
 }
