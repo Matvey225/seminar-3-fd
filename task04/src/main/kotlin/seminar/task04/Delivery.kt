@@ -1,40 +1,49 @@
 package seminar.task04
 
+
 abstract class Delivery(
-    val destination: String) {
+    val destination: String
+) {
     init {
-       require(destination.isNotBlank())
+        require(destination.isNotBlank())
     }
 
     abstract fun cost(weightKg: Int): Int
 
     fun label(weightKg: Int): String {
-        return "Доставка в ${destination}: ${cost(weightKg)} руб."
+        val price = cost(weightKg)
+        return "Доставка в $destination: $price"
     }
 }
 
-class Pickup(destination: String) : Delivery(destination) {
-    override fun cost(weightKg: Int): Int{
+class Pickup(destination: String)
+    : Delivery(destination) {
+
+    override fun cost(weightKg: Int): Int {
         require(weightKg > 0)
         return 0
     }
 }
 
-class CourierDelivery(destination: String) : Delivery(destination) {
+class CourierDelivery(destination: String)
+    : Delivery(destination) {
+
     override fun cost(weightKg: Int): Int {
         require(weightKg > 0)
-        return 200 + (weightKg * 50)
+        return 200 + 50 * weightKg
     }
 }
 
+
 class ExpressDelivery(
     destination: String,
-    private val distanceKm: Int) : Delivery(destination) {
+    private val distance: Int
+) : Delivery(destination) {
     init {
-        require(distanceKm > 0)
+        require(distance > 0)
     }
     override fun cost(weightKg: Int): Int {
         require(weightKg in 1..10)
-        return 300 + (weightKg * 80) + (distanceKm * 20)
+        return 300 + 80 * weightKg + distance * 20
     }
 }
