@@ -156,7 +156,7 @@ class Library(
                     status = "выдана"
                 }
                 message += "${book.id}. ${book.title} — ${book.author}: $status"
-                if (i < books.size){
+                if (i < books.size - 1){
                     message += "\n"
                 }
             }
