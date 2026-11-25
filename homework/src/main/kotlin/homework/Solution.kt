@@ -143,19 +143,22 @@ class Library(
     }
 
     fun report(): String{
-        val consoleNotifier = ConsoleNotifier()
         var message = ""
         if (books.isEmpty()){
             message = "Библиотека пуста"
         } else {
-            for (book in books) {
+            for (i in 0 until books.size){
+                val book = books[i]
                 var status = ""
-                if (book.isAvailable) {
+                if (book.isAvailable){
                     status = "доступна"
                 } else {
                     status = "выдана"
                 }
-                message += "${book.id}. ${book.title} - ${book.author}: $status \n"
+                message += "${book.id}. ${book.title} - ${book.author}: $status"
+                if (i < books.size){
+                    message += "\n"
+                }
             }
         }
         return message
